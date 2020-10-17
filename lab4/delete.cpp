@@ -7,7 +7,6 @@ int k = 0;
 class Ajilchin
 {
 private:
-    float ZahiralTsalin();
     int dugaar;
     char *name;
     char *albanTushaal;
@@ -29,6 +28,7 @@ public:
     float get_ajilsanTsag();
     //-------------------
     float tsalinBoddoh();
+    float ZahiralTsalin();
     float Tsagnemeh();
     void swap();
     ~Ajilchin();
@@ -52,11 +52,11 @@ Ajilchin::Ajilchin(int id, char *ner, char *position, float worktime)
 }
 Ajilchin ::~Ajilchin()
 {
-    // delete name;
-    // delete albanTushaal;
-    // cout << k << " dugaar objectiig ustgalaa\n";
-    // k--;
-    // cout << "name = " << name << "\n"; //delete ajillaj baigaag shalgaj bna
+    delete name;
+    delete albanTushaal;
+    cout << k << " dugaar objectiig ustgalaa\n";
+    k--;
+    cout << "name = " << name << "\n"; //delete ajillaj baigaag shalgaj bna
 }
 void Ajilchin ::set_dugaar(int x)
 {
@@ -186,16 +186,6 @@ int main()
         ajil[i].Utgaavah();
     }
     heading();
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n - 1 - i; j++)
-        {
-            if (ajil[j].tsalinBoddoh() > ajil[j + 1].tsalinBoddoh())
-            {
-                swap(ajil[j], ajil[j + 1]);
-            }
-        }
-    }
     for (int i = 0; i < n; i++)
         ajil[i].Print();
     cout << "\n";

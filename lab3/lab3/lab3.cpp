@@ -1,89 +1,95 @@
 #include <iostream>
+#include <string.h>
+#include <cstring>
 using namespace std;
 class Ajilchin
 {
-
 private:
     int dugaar;
-    char name[20];
-    char albanTushaal[10];
-    float ajlsanTsag;
+    char *name;
+    char *albanTushaal;
+    float ajilsanTsag;
 
 public:
-    void garaaniiUtga();
-    void UtgaAvah();
-    void delgetsendHevleh();
-    float tsalinBodoh();
-    float zahirliinTsalin();
-    float tsagNemeh();
+    // Ajilchin(int);
+    // Ajilchin();
+    void GaraaniiUtga();
+    void Utgaavah();
+    void Print();
+    float tsalinBoddoh();
+    float ZahiralTsalin();
+    float Tsagnemeh();
 };
-void Ajilchin::garaaniiUtga()
+// Ajilchin : Ajilchin(/* args */)
+// {
+// }
+// Ajilchin::Ajilchin()
+// {
+// }
+void Ajilchin::GaraaniiUtga()
 {
+    name = new char[20];
+    albanTushaal = new char[10];
     dugaar = 0;
-    strcmp(name, "");
-    strcmp(albanTushaal, "ajilchin");
-    ajlsanTsag = 0;
+    strcpy(name, "");
+    strcpy(albanTushaal, "ajilchin");
+    ajilsanTsag = 0;
 }
-void Ajilchin::UtgaAvah()
+void Ajilchin ::Utgaavah()
 {
-    cout << "Ajilchnii Dugaar : ";
+    cout << "id = ";
     cin >> dugaar;
-    cout << "Ner : ";
+    cout << "Name = ";
     cin >> name;
-    cout << "Alban tushaal : ";
+    cout << "ALban Tushaal : ";
     cin >> albanTushaal;
-    cout << "Ajilsan tsag :";
-    cin >> ajlsanTsag;
+    cout << "Ajilsan tsag = ";
+    cin >> ajilsanTsag;
+    cout << "\n";
 }
-void Ajilchin::delgetsendHevleh()
+void Ajilchin::Print()
 {
-    cout << "Ajilchnii dugaar : ";
-    cout << dugaar << "   ";
-    cout << "Ner : ";
-    cout << name << "   ";
-    cout << "Albantushaal : ";
-    cout << albanTushaal << "   ";
-    cout << "Ajilsan Tsag  : ";
-    cout << ajlsanTsag << "\n";
+    cout << "Achilchnii ner : " << name << "\n";
+    cout << "dugaar : " << dugaar << "\n";
+    cout << "Alban tushaal : " << albanTushaal << "\n";
+    cout << "Ajilsan tsag  : " << ajilsanTsag << "\n";
 }
-float Ajilchin::tsalinBodoh()
+float Ajilchin::tsalinBoddoh()
 {
-    int tsagiinTsalin = 5000, tsalin = 0, zahiralMon;
+    int salary = 5000, Tsalin = 0, zahiralMon;
     zahiralMon = strcmp(albanTushaal, "zahiral");
-    if (zahiralMon == 0)
+    if (zahiralMon != 0)
     {
-        tsalin = ajlsanTsag * tsagiinTsalin + zahirliinTsalin();
+        Tsalin = ajilsanTsag * salary;
     }
     else
     {
-        tsalin = ajlsanTsag * tsagiinTsalin;
+        Tsalin = ajilsanTsag * salary + ZahiralTsalin();
     }
-    return tsalin;
+    return Tsalin;
 }
-float Ajilchin::zahirliinTsalin()
+float Ajilchin ::ZahiralTsalin()
 {
-    int zahiralTsagiinTsalin = 10000, salary = 0;
-    salary = ajlsanTsag * zahiralTsagiinTsalin;
+    int dsal = 7000, salary;
+    salary = ajilsanTsag * dsal;
     return salary;
 }
-float Ajilchin::tsagNemeh()
+float Ajilchin ::Tsagnemeh()
 {
-    ajlsanTsag++;
-    if (ajlsanTsag > 0 && ajlsanTsag < 24)
+    ajilsanTsag++;
+    if (ajilsanTsag > 0 && ajilsanTsag < 24)
     {
         return 1;
     }
     else
-    {
         return 0;
-    }
 }
 int main()
 {
     Ajilchin ajil;
-    ajil.garaaniiUtga();
-    ajil.UtgaAvah();
-    ajil.delgetsendHevleh();
-    ajil.tsagNemeh();
-    cout << "Niit tsalin  = " << ajil.tsalinBodoh() << "\n";
+    ajil.GaraaniiUtga();
+    ajil.Utgaavah();
+    ajil.Print();
+    ajil.Tsagnemeh();
+    cout << "Niit Tsalin = " << ajil.tsalinBoddoh() << "\n";
 }

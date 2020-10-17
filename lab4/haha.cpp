@@ -12,9 +12,10 @@ private:
 
 public:
     Employee();
-    Employee(int, char *, char *, float); // parametrt baiguulagch todorxoilj bn ~Employee();
-    void set_id(int);                     // gishuun ogogdold utga onoox
-    int get_id();                         //gishuun ogogdold utgiig butsaaj avna
+    Employee(int, char *, char *, float); // parametrt baiguulagch todorxoilj bn
+    void set_id(int);
+    ~Employee();  // gishuun ogogdold utga onoox
+    int get_id(); //gishuun ogogdold utgiig butsaaj avna
     void set_name(char *);
     char *get_name();
     void set_job(char *);
@@ -29,7 +30,8 @@ Employee ::Employee()
 {
     name = new char[20];
     job = new char[20];
-    strcpy(name, " "); //temdegted utga onoono strcpy(job, " ");
+    strcpy(name, " "); //temdegted utga onoono
+    strcpy(job, " ");
     workTime = 0;
     cout << "Anxdagch duudagdlaa" << endl;
 };
