@@ -219,7 +219,7 @@ int main()
                 if (ajil[i]->get_dugaar() == ajil[j]->get_dugaar())
                 {
                     cout << "\n"
-                         << "DAVHARDSAN ID !!! " << i + 1 << "-r ajiltnii id -g dahin oruulna uu\n";
+                         << "DAVHARDSAN ID !!! " << i + 1 << "-r ajiltnii id -g dahin oruulna uu";
                     chID = 1;
                     break;
                 }
@@ -232,6 +232,19 @@ int main()
             {
                 break;
             }
+
+            // ajil[i]->idAvah();
+            // chID = checkID(ajil, i);
+            // cout << "hahahha = " << chID << "\n"
+            //      << "hohoho i = " << i << "\n";
+            // if (chID == 1)
+            // {
+            //     cout << "\n"
+            //          << "DAVHARDSAN ID !!! " << i + 1 << "ajiltnii id -g dahin oruulna uu = ";
+            //     // chID = checkID(ajil, i);
+            // }
+            // else
+            //     break;
         }
         ajil[i]->Utgaavah();
     }
