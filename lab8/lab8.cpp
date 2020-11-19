@@ -8,8 +8,10 @@ protected:
     char *name;
 
 public:
+    virtual double perimeter() = 0;
     shape();
     ~shape();
+    char *getname();
 };
 
 shape::shape()
@@ -17,7 +19,10 @@ shape::shape()
     name = new char[10];
     strcpy(name, " ");
 }
-
+char *shape::getname()
+{
+    return name;
+}
 shape::~shape()
 {
     delete name;
@@ -27,32 +32,15 @@ class _2dshape : public shape
 {
 protected:
     int Perimeter, Taliin_urt;
-    float Talbai;
 
 public:
-    int talbaiOloh();
+    virtual double talbaiOloh() = 0;
+    virtual void utgaAvah() = 0;
+    virtual void medeelel() = 0;
     _2dshape();
     ~_2dshape();
-    int arr[10];
-    int erembe;
-    void erembeleh();
-    void printAreas();
 };
 
-void _2dshape::erembeleh()
-{
-    for (int i = 0; i < aaaa; i++)
-    {
-        cout << arr[i] << "\n";
-    }
-}
-void _2dshape::printAreas()
-{
-    for (int i = 0; i <= erembe; i++)
-    {
-        cout << " talbai = " << arr[i] << "\n";
-    }
-}
 _2dshape::_2dshape()
 {
 }
@@ -69,8 +57,8 @@ private:
     int x_o, y_o;
 
 public:
-    double urtOloh();
-    double cArea();
+    double perimeter();
+    double talbaiOloh();
     void utgaAvah();
     void set_r(int);
     int get_r();
@@ -78,8 +66,8 @@ public:
     int get_x_o();
     void set_y_o(int);
     int get_y_o();
-    void set_name(char *);
     char *get_name();
+    void set_name(char *);
     void medeelel();
     circle();
     ~circle();
@@ -126,7 +114,7 @@ char *circle::get_name()
 {
     return name;
 }
-double circle ::urtOloh()
+double circle ::perimeter()
 {
     return (2 * 3.14 * r);
 }
@@ -143,7 +131,7 @@ void circle::utgaAvah()
     cin >> r;
     set_r(r);
 }
-double circle ::cArea()
+double circle ::talbaiOloh()
 {
     return (3.14 * r * r);
 }
@@ -162,12 +150,11 @@ private:
         d_x, d_y;
 
 public:
-    void talbaiOloh();
+    double talbaiOloh();
     square();
     ~square();
-    double sArea();
-    void sUtgaAvah();
-    int sPerimeter();
+    void utgaAvah();
+    double perimeter();
     void coordinate();
     void medeelel();
     int get_a_x();
@@ -211,12 +198,12 @@ void square::medeelel()
     cout << "Zuun dood : "
          << "(" << get_d_x() << "," << get_d_y() << ")\n";
 }
-int square ::sPerimeter()
+double square ::perimeter()
 {
     this->Perimeter = this->Taliin_urt * 4;
     return (this->Perimeter);
 }
-void square::sUtgaAvah()
+void square::utgaAvah()
 {
     cout << "Taliin urtaa oruulna uu = ";
     cin >> this->Taliin_urt;
@@ -228,7 +215,7 @@ void square::sUtgaAvah()
     cin >> a_y;
     set_a_y(a_y);
 }
-double square ::sArea()
+double square ::talbaiOloh()
 {
     this->Talbai = this->Taliin_urt * this->Taliin_urt;
     return (this->Talbai);
@@ -313,7 +300,7 @@ void square::coordinate()
 }
 
 //triangle class
-class triangle : _2dshape
+class triangle : public _2dshape
 {
 private:
     float h;
@@ -322,9 +309,9 @@ private:
 public:
     triangle();
     ~triangle();
-    void tUtgaaAvah();
-    double tArea();
-    int tPerimeter();
+    void utgaAvah();
+    double talbaiOloh();
+    double perimeter();
     void coordinate();
     void printCoordinate();
     void medeelel();
@@ -354,8 +341,9 @@ triangle::~triangle()
     cout << "object deleted!!!!!\n";
     delete[] name;
 }
-void triangle ::tUtgaaAvah()
+void triangle ::utgaAvah()
 {
+    cout << "Gurvaljnii medeellee oruulna uu\n";
     cout << "Taliin urtaa oruulna uu = ";
     cin >> this->Taliin_urt;
     cout << "Oroin tseguudiig orulna uu\n";
@@ -366,12 +354,12 @@ void triangle ::tUtgaaAvah()
     cin >> y1;
     set_y1(y1);
 }
-int triangle ::tPerimeter()
+double triangle ::perimeter()
 {
     this->Perimeter = this->Taliin_urt * 3;
     return (this->Perimeter);
 }
-double triangle::tArea()
+double triangle::talbaiOloh()
 {
     this->Talbai = this->Taliin_urt * this->Taliin_urt * sqrt(3) / 4;
     return (this->Talbai);
@@ -469,184 +457,96 @@ void heading()
 }
 int main()
 {
-    _2dshape *haha;
-
-    int n;
-    int numberOfcircle, numberOfsquare, numberOftriangle, numberOfshape;
-    // cout << "niit heden durs oruulah ve = ";
-    // cin >> numberOfshape;
-    // _2dshape *shape[numberOfshape];
-    cout << "Heden circle uusgeh ve ?  = ";
-    cin >> numberOfcircle;
-    cout << "\n";
-    circle *c[numberOfcircle];
-    for (int i = 0; i < numberOfcircle; i++)
-        c[i] = new circle;
-    cout << "Heden square uusgeh ve ?  = ";
-    cin >> numberOfsquare;
-    cout << "\n";
-    square *s[numberOfsquare];
-    for (int i = 0; i < numberOfsquare; i++)
-        s[i] = new square;
-    cout << "Heden triangle uusgeh ve ?  = ";
-    cin >> numberOftriangle;
-    cout << "\n";
-    triangle *t[numberOftriangle];
-    for (int i = 0; i < numberOftriangle; i++)
-        t[i] = new triangle;
-    while (n != 6)
+    int n, cir, squ, tri;
+    cout << "Heden durs oruulah ve = ";
+    cin >> n;
+    _2dshape *shap[n];
+    while (1)
     {
-        heading();
-        cin >> n;
-
-        switch ((n))
+        cout << "Heden toirog oruulah ve = ";
+        cin >> cir;
+        if (cir > n)
+            cout << "Dursiin too hetersen baina!!! \n";
+        else
+            break;
+    }
+    if (cir < n)
+    {
+        while (1)
         {
-        case 1:
-            int k;
-            for (int i = 0; i < numberOfcircle; i++)
-            {
-                cout << i + 1 << " r "
-                     << "toirgiin medeelelee oruulna uu \n";
-                c[i]->utgaAvah();
-            }
-            while (k != 4)
-            {
-                cout << "\n\n1.Talbai oloh   2 Perimeter oloh   3.Medeelel harah  4.exit\n"
-                     << "*************************************************************\n";
-                cin >> k;
-                switch (k)
-                {
-                case 1:
-                    for (int i = 0; i < numberOfcircle; i++)
-                    {
-                        haha->arr[aaaa] = c[i]->cArea();
-                        aaaa++;
-                        cout
-                            << i + 1 << " r Toirgiin talbai = " << c[i]->cArea() << "\n";
-                    }
-                    break;
-                case 2:
-                    for (int i = 0; i < numberOfcircle; i++)
-                        cout << i + 1 << " r Toirgiin perimeter = " << c[i]->urtOloh() << "\n";
-                    break;
-                case 3:
-                    for (int i = 0; i < numberOfcircle; i++)
-                    {
-                        cout << i + 1 << "r toirgiin";
-                        c[i]->medeelel();
-                    }
-                    // cout << i + 1 << " r Toirgiin medeelel = " << c[i]->medeelel() << "\n";
-                    break;
-                default:
-                    break;
-                }
-            }
-
-            break;
-        case 2:
-            int l;
-            for (int i = 0; i < numberOfsquare; i++)
-            {
-                cout << i + 1 << " r "
-                     << "kvadratiin medeelelee oruulna uu \n";
-                s[i]->sUtgaAvah();
-            }
-            while (l != 4)
-            {
-                cout << "1.Talbai Oloh   2. Perimeter oloh  3. Medeelel harah 4.exit\n"
-                     << "*************************************************************\n";
-                cin >> l;
-                switch (l)
-                {
-                case 1:
-                    for (int i = 0; i < numberOfsquare; i++)
-                    {
-                        haha->arr[aaaa] = s[i]->sArea();
-                        aaaa++;
-                        cout << i + 1 << " -r Kvadratiin talbai = " << s[i]->sArea() << "\n";
-                    }
-                    break;
-                case 2:
-                    for (int i = 0; i < numberOfsquare; i++)
-                        cout << i + 1 << " -r Kvadratiin perimeter = " << s[i]->sPerimeter() << "\n";
-                    break;
-                case 3:
-                    for (int i = 0; i < numberOfsquare; i++)
-                    {
-                        cout << i + 1 << "-r dursiin medeelel\n";
-                        s[i]->medeelel();
-                    }
-                    break;
-                default:
-                    break;
-                }
-            }
-            break;
-        case 3:
-            for (int i = 0; i < numberOftriangle; i++)
-            {
-                cout << i + 1 << " r "
-                     << "gurvaljnii medeelelee oruulna uu \n";
-                t[i]->tUtgaaAvah();
-            }
-            int q;
-            while (q != 4)
-            {
-                cout << "1.Talbai Oloh   2.Perimeter oloh  3.Dursiin medeelel 4.exit\n"
-                     << "************************************************************\n";
-                cin >> q;
-                switch (q)
-                {
-                case 1:
-                    for (int i = 0; i < numberOftriangle; i++)
-                    {
-                        haha->arr[aaaa] = t[i]->tArea();
-                        aaaa++;
-                        cout << i + 1 << " r Gurvaljnii talbai = " << t[i]->tArea() << "\n";
-                    }
-                    break;
-                case 2:
-                    for (int i = 0; i < numberOftriangle; i++)
-                        cout << i + 1 << " r Gurvaljnii perimeter = " << t[i]->tPerimeter() << "\n";
-                    break;
-                case 3:
-                    //dursiin medeelel
-                    for (int i = 0; i < numberOftriangle; i++)
-                    {
-                        cout << i + 1 << "-r gurvaljnii medeelel\n";
-                        t[i]->medeelel();
-                    }
-                    break;
-                default:
-                    break;
-                }
-            }
-            break;
-        case 4:
-            cout << "Dursuudiin talbai\n";
-            for (int i = 0; i < numberOfcircle; i++)
-            {
-                cout << "circle " << i + 1 << " :";
-                cout << c[i]->cArea() << "\n";
-            }
-            for (int i = 0; i < numberOfsquare; i++)
-            {
-                cout << "square " << i + 1 << " :";
-                cout << s[i]->sArea() << "\n";
-            }
-            for (int i = 0; i < numberOftriangle; i++)
-            {
-                cout << "triangle " << i + 1 << " :";
-                cout << t[i]->tArea() << "\n";
-            }
-            break;
-        case 5:
-            haha->erembeleh();
-            break;
-        default:
-            return 0;
+            cout << "Heden kavdrat oruulah ve = ";
+            cin >> squ;
+            if (cir + squ > n)
+                cout << "Dursiin too hetersen baina!!!\n";
+            else
+                break;
         }
     }
+    if (cir + squ < n)
+    {
+        tri = n - cir - squ;
+        cout << tri << " gurvaljin uuslee \n"
+             << "\n\n";
+    }
+    int i = 0, j = 0;
+    for (i = 0; i < cir; i++)
+    {
+        shap[i] = new circle;
+        cout << "\n"
+             << i + 1 << " -r Toirgiin medeellee oruulna uu\n\n";
+        shap[i]->utgaAvah();
+    }
+    for (j = i; j < squ + cir; j++)
+    {
+        shap[j] = new square;
+        cout << j - i + 1 << " -r kvadratiin medeellee oruulna uu\n\n";
+        shap[j]->utgaAvah();
+    }
 
+    for (int k = j; k < squ + cir + tri; k++)
+    {
+        shap[k] = new triangle;
+        cout << "\n"
+             << k - j + 1 << " -r Gurvaljnii medeellee oruulna uu\n\n";
+        shap[k]->utgaAvah();
+    }
+    cout << "Dursuudiin Talbai : \n";
+    for (int z = 0; z < n; z++)
+    {
+        cout << "    "
+             << "Durs ";
+        cout << z + 1 << "-iin S = " << shap[z]->talbaiOloh();
+        cout << " (" << shap[z]->getname() << ")"
+             << "\n";
+    }
+    _2dshape *temp;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (shap[j]->talbaiOloh() > shap[j + 1]->talbaiOloh())
+            {
+                temp = shap[j];
+                shap[j] = shap[j + 1];
+                shap[j + 1] = temp;
+            }
+        }
+    }
+    cout << "Dursuudiin Perimeter : \n";
+    for (int z = 0; z < n; z++)
+    {
+        cout << "    "
+             << "Durs ";
+        cout << z + 1 << "-iin P = " << shap[z]->perimeter();
+        cout << " (" << shap[z]->getname() << ")" << endl;
+    }
+    cout << "\n\nErembelegdsen talbai : \n";
+    for (int z = 0; z < n; z++)
+    {
+        cout << "    "
+             << "Durs ";
+        cout << "-iin S = " << shap[z]->talbaiOloh();
+        cout << " (" << shap[z]->getname() << ")" << endl;
+    }
     return 0;
 }
